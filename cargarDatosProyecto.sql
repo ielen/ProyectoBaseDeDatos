@@ -172,11 +172,11 @@ HAVING count(m.dniEmpleado) > 1;
 
 
 INSERT INTO reclamo ( id_usuario, nro_reclamo, codigoMot, fecha_reclamo, hora_reclamo, fecha_solucion)  -- cargamos uno en la tabla reclamo para despues eliminarlo
-VALUES ( 2, 5, 3,  '2024-10-01', '09:00:00', '2024-10-05');
+VALUES ( 2, 8, 3,  '2024-10-01', '09:00:00', '2024-10-05');
 
 DELETE 
 FROM reclamo 
-WHERE nro_reclamo = 5;       -- que me elimine de la tabla reclamo el nro de reclamo = 5
+WHERE nro_reclamo = 8;       -- que me elimine de la tabla reclamo el nro de reclamo = 5
   
   SELECT *                     -- verificamos que realmente quedó registrado en la tabla reclamos_borrados
 FROM reclamos_borrados;

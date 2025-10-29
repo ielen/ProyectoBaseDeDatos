@@ -146,6 +146,7 @@ CREATE TABLE Reclamos_borrados (                                                
 
 
 
+
 DROP TRIGGER IF EXISTS trigger_baja_reclamos;
 delimiter $$
 CREATE TRIGGER trigger_baja_reclamos                                                          -- creamos el disparador          
@@ -157,3 +158,6 @@ CREATE TRIGGER trigger_baja_reclamos                                            
 	END;
 $$
 delimiter ;
+
+
+
