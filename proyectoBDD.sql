@@ -1,10 +1,13 @@
--- integrantes: Guzman Ayelen, Quiroga Maira, Pari Jennifer, Luna Natasha
+                -- integrantes: Guzman Ayelen, Quiroga Maira, Pari Jennifer, Luna Natasha
+
+
 CREATE DATABASE IF NOT EXISTS Servicio;                               -- Creacion de la base de datos llamada "Servicio" 
 
 /* 
 	Tabla de las entidades
 */
 
+DROP DATABASE Usuario;
 
 DROP TABLE IF EXISTS Usuario;                                         -- eliminamos tabla, si existe una llamada "usuario"
 CREATE TABLE Usuario (                                                -- creamos tabla "usuario"
@@ -109,11 +112,11 @@ CREATE TABLE Llamados (                                                         
 
 DROP TABLE IF EXISTS UsoMaterial;            
 CREATE TABLE UsoMaterial (                                                                                  -- crea tabla "usoMaterial"
-	nro_reclamo INTEGER UNSIGNED NOT NULL,                                                                  -- (nroRec en el diagrama)
+    nro_reclamo INTEGER UNSIGNED NOT NULL,                                                                  -- (nroRec en el diagrama)
     codigoMat INTEGER UNSIGNED NOT NULL,                                                                    -- (codMat en el diagrama)
     cantMat INTEGER,
     CONSTRAINT cantidad CHECK(cantMat <= 999),                                                           -- restriccion que la cantMat sea menor o igual a 999
-    CONSTRAINT fk_nro_reclamo_uso FOREIGN KEY (nro_reclamo) REFERENCES Reclamo(nro_reclamo),                  -- restriccion de clave primaria
+    CONSTRAINT fk_nro_reclamo_uso FOREIGN KEY (nro_reclamo) REFERENCES Reclamo(nro_reclamo) ON DELETE CASCADE,                -- restriccion de clave primaria
     CONSTRAINT fk_codigoMat_uso FOREIGN KEY (codigoMat) REFERENCES Material(codigoMat)                          -- restriccion de clave foranea a tabla material
     ON DELETE CASCADE
 );
@@ -159,4 +162,3 @@ CREATE TRIGGER trigger_baja_reclamos                                            
 	END;
 $$
 delimiter ;
-
