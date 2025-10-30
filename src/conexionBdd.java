@@ -7,7 +7,7 @@ public class conexionBdd {
     private static String driver = "com.mysql.cj.jdbc.Driver";
     private static String url = "jdbc:mysql://localhost:3306/servicio"; //dirección de la base de datos
     private static String username = "root"; // el usuario por defecto
-    private static String password = "44606586"; // la contrase;a de mysql
+    private static String password = "jennifer13"; // la contrase;a de mysql
 
     public static Connection getConnection() {
         try {

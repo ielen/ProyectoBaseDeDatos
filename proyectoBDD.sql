@@ -1,8 +1,5 @@
 -- integrantes: Guzman Ayelen, Quiroga Maira, Pari Jennifer, Luna Natasha
-
-
 CREATE DATABASE IF NOT EXISTS Servicio;                               -- Creacion de la base de datos llamada "Servicio" 
-USE Servicio;
 
 /* 
 	Tabla de las entidades
@@ -45,15 +42,15 @@ CREATE TABLE Persona (                                                          
 
 
 
-DROP TABLE IF EXISTS Empleado;                                                           -- verifica si esa tabla existe para eliminarla
-CREATE TABLE Empleado (                                                                  -- crea la tabla "Empleado"
-	dniEmpleado INTEGER NOT NULL UNIQUE,                                                        -- crea la columna dniEmpleado  (dniEmp en el diagrama)
-    nombre VARCHAR(20) NOT NULL,                                                         -- crea la columna nombre
-    apellido VARCHAR(20) NOT NULL,                                                       -- crea la columna apellido
-    sueldo INTEGER,                                                                      -- crea la columna sueldo
-    CONSTRAINT fk_dni FOREIGN KEY (dniEmpleado) REFERENCES Persona(dni)                  -- restriccion de clave foranea a persona
-    ON DELETE CASCADE                                                                     -- si elimina el valor del padre, tmb lo hará en el hijo
-    ON UPDATE CASCADE                                                                     -- si modifica el valor del padre, tmb lo hará en el hijo
+DROP TABLE IF EXISTS Empleado;                                                 -- verifica si esa tabla existe para eliminarla
+CREATE TABLE Empleado (                                                        -- crea la tabla "Empleado"
+	dniEmpleado INTEGER NOT NULL UNIQUE,                                       -- crea la columna dniEmpleado  (dniEmp en el diagrama)
+    nombre VARCHAR(20) NOT NULL,                                               -- crea la columna nombre
+    apellido VARCHAR(20) NOT NULL,                                             -- crea la columna apellido
+    sueldo INTEGER,                                                             -- crea la columna sueldo
+    CONSTRAINT fk_dni FOREIGN KEY (dniEmpleado) REFERENCES Persona(dni)         -- restriccion de clave foranea a persona
+    ON DELETE CASCADE                                                            -- si elimina el valor del padre, tmb lo hará en el hijo
+    ON UPDATE CASCADE                                                           -- si modifica el valor del padre, tmb lo hará en el hijo
 );
 
 
@@ -100,6 +97,7 @@ CREATE TABLE Llamados (                                                         
     hora_reclamo TIME,                                                                               -- (hora_llamado en el diagrama)
     CONSTRAINT pk_nro_llamadoReclamo_llamado PRIMARY KEY (nro_llamado, nro_reclamo),                 -- restriccion clave primaria
     CONSTRAINT fk_nroReclamo_llamados FOREIGN KEY (nro_reclamo) REFERENCES Reclamo (nro_reclamo)     -- restriccion de clave foranea a tabla reclamo
+    ON DELETE CASCADE
 );
 
 
@@ -117,6 +115,7 @@ CREATE TABLE UsoMaterial (                                                      
     CONSTRAINT cantidad CHECK(cantMat <= 999),                                                           -- restriccion que la cantMat sea menor o igual a 999
     CONSTRAINT fk_nro_reclamo_uso FOREIGN KEY (nro_reclamo) REFERENCES Reclamo(nro_reclamo),                  -- restriccion de clave primaria
     CONSTRAINT fk_codigoMat_uso FOREIGN KEY (codigoMat) REFERENCES Material(codigoMat)                          -- restriccion de clave foranea a tabla material
+    ON DELETE CASCADE
 );
 
 DROP TABLE IF EXISTS Mantiene;
@@ -126,6 +125,7 @@ CREATE TABLE Mantiene (
     CONSTRAINT pk_mantiene PRIMARY KEY (dniEmpleado, nro_reclamo),
     CONSTRAINT fk_Mantiene_dni FOREIGN KEY (dniEmpleado) REFERENCES Empleado(dniEmpleado),
     CONSTRAINT fk_Mantiene_reclamo FOREIGN KEY (nro_reclamo) REFERENCES Reclamo(nro_reclamo)
+    ON DELETE CASCADE
 );
 
 
